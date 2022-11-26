@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Field : MonoBehaviour
 {
+    public static Field Instance;
+
     [Header("Field Properties")]
     [SerializeField] private float CellSize;
     [SerializeField] private float Spacing; //размер отступа между плитками
@@ -20,15 +22,49 @@ public class Field : MonoBehaviour
     [SerializeField] private RectTransform rectTransform;
 
     private Cell[,] field; // поле мы будем хранить в двухмерном массиве
-    void Start()
-    {
-        GenerateField();
-    }
 
+    private bool anyCellMoved;
 
-    void Update()
+    private void Start()
     {
         
+    }
+
+    private void Update()
+    {
+#if UNITY_EDITOR
+        if (Input.GetKeyDown(KeyCode.A))
+            OnInput(Vector2.left);
+        if (Input.GetKeyDown(KeyCode.D))
+            OnInput(Vector2.right);
+        if (Input.GetKeyDown(KeyCode.W))
+            OnInput(Vector2.up);
+        if (Input.GetKeyDown(KeyCode.S))
+            OnInput(Vector2.down);
+#endif
+    }
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+    }
+
+    private void OnInput(Vector2 direction)
+    {
+
+    }
+
+    private void Move(Vector2 direction)
+    {
+
+    }
+
+    private void CheckGameresult()
+    {
+
     }
 
     private void CreateField()
